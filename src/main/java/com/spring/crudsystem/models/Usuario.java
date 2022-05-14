@@ -2,12 +2,19 @@ package com.spring.crudsystem.models;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import java.util.*;
+
+
 
 @Entity
+@Table(name = "TB_USUARIO")
 public class Usuario implements Serializable {
 	
 	private static final long serialVersionUTD = 1L;
@@ -20,6 +27,9 @@ public class Usuario implements Serializable {
 	private String email;
 	private String genero;
 	private String profissao;
+	
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	private List<Veiculo> veiculos;
 	
 	public Usuario() {
 	}
@@ -78,5 +88,13 @@ public class Usuario implements Serializable {
 
 	public void setProfissao(String profissao) {
 		this.profissao = profissao;
+	}
+
+	public List<Veiculo> getVeiculos() {
+		return veiculos;
+	}
+
+	public void setVeiculos(List<Veiculo> veiculos) {
+		this.veiculos = veiculos;
 	}
 }
